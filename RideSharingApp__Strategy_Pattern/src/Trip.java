@@ -1,37 +1,84 @@
 public class Trip {
-    private RideTypeStrategy rideTypeStrategy;
-    private PaymentMethodStrategy paymentMethodStrategy;
-    private NotificationStrategy notificationStrategy;
-    private double baseFare;
-    private Rider rider;
+    private int id;
+    private String pickupLocation;
+    private String dropOffLocation;
+    private RideType rideType;
+    private double fare;
+    private double distance;
     private Driver driver;
+    private String status;
 
-    public Trip(Rider rider, Driver driver, RideTypeStrategy rideTypeStrategy, double baseFare) {
-        this.rider = rider;
+    public Trip(int id, String pickupLocation, String dropOffLocation, RideType rideType, double distance) {
+        this.id = id;
+        this.pickupLocation = pickupLocation;
+        this.dropOffLocation = dropOffLocation;
+        this.rideType = rideType;
+        this.distance = distance;
+        this.fare = calculateFare();
+        this.status = "Requested";
+    }
+
+    public double calculateFare() {
+        switch (rideType) {
+            case CARPOOL:
+                return distance * 20;
+
+            case LUXURY:
+                return distance * 35;
+
+            case BIKE:
+                return distance * 15;
+
+            default:
+                return distance * 10;
+        }
+    }
+
+    public void assignDriver(Driver driver) {
         this.driver = driver;
-        this.rideTypeStrategy = rideTypeStrategy;
-        this.baseFare = baseFare;
+        this.status = "Driver Assigned";
     }
 
-    public void setPaymentMethod(PaymentMethodStrategy paymentMethodStrategy) {
-        this.paymentMethodStrategy = paymentMethodStrategy;
+    public void startTrip() {
+        this.status = "In Progress";
+        System.out.println("Trip has started.");
     }
 
-    public void setNotificationMethod(NotificationStrategy notificationStrategy) {
-        this.notificationStrategy = notificationStrategy;
+    public void completeTrip() {
+        this.status = "Completed";
+        System.out.println("Trip has been completed.");
     }
 
-    public double calculateFare(double distance) {
-        return rideTypeStrategy.calculateFare(distance, baseFare);
+    // Getter methods for accessing private fields
+    public int getId() {
+        return id;
     }
 
-    public void completeTrip(double fare) {
-        System.out.println("Completing trip...");
-        driver.completeTrip();
-        paymentMethodStrategy.processPayment(fare);
+    public String getPickupLocation() {
+        return pickupLocation;
     }
 
-    public void sendTripNotification(String message) {
-        notificationStrategy.sendNotification(message);
+    public String getDropOffLocation() {
+        return dropOffLocation;
+    }
+
+    public RideType getRideType() {
+        return rideType;
+    }
+
+    public double getFare() {
+        return fare;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

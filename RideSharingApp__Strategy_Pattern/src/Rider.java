@@ -1,37 +1,32 @@
-public class Rider {
-    private String name;
-    private String location;
-    private PaymentMethodStrategy preferredPaymentMethod;
-    private NotificationStrategy preferredNotificationMethod;
+public class Rider extends User {
+    private IPaymentMethod preferredPaymentMethod;
 
-    public Rider(String name, String location) {
-        this.name = name;
-        this.location = location;
+    public Rider(int id, String name, String location, IPaymentMethod preferredPaymentMethod) {
+        super(id, name, location);
+        this.preferredPaymentMethod = preferredPaymentMethod;
     }
 
-    public String getName() {
-        return name;
+    public void requestRide(String pickupLocation, String dropOffLocation, RideType rideType) {
+        System.out.println(name + " has requested a " + rideType + " ride from " + pickupLocation + " to " + dropOffLocation + ".");
     }
 
-    public void setPreferredPaymentMethod(PaymentMethodStrategy paymentMethod) {
-        this.preferredPaymentMethod = paymentMethod;
+    public void rateDriver(Driver driver, double rating) {
+        driver.updateRating(rating);
+        System.out.println(name + " rated " + driver.getName() + " with " + rating + " stars.");
     }
 
-    public void setPreferredNotificationMethod(NotificationStrategy notificationMethod) {
-        this.preferredNotificationMethod = notificationMethod;
+    public void makePayment(Trip trip) {
+        preferredPaymentMethod.ProcessPayment(trip.getFare());
     }
 
-    public void requestRide(Trip trip, double distance) {
-        // Calculate fare for the trip
-        double fare = trip.calculateFare(distance);
-        System.out.println(name + " requested a ride. Estimated fare: $" + fare);
+    // Method to change the payment method dynamically
+    public void changePaymentMethod(IPaymentMethod newMethod) {
+        this.preferredPaymentMethod = newMethod;
+        System.out.println(name + " selected a payment method.");
+    }
 
-        // Complete the trip and process payment using preferred method
-        trip.setPaymentMethod(preferredPaymentMethod);
-        trip.completeTrip(fare);
-
-        // Send notification via preferred method
-        trip.setNotificationMethod(preferredNotificationMethod);
-        trip.sendTripNotification("Your trip has been completed.");
+    @Override
+    public void displayInfo() {
+        System.out.println("Rider: " + name + ", Location: " + location + ", Rating: " + rating);
     }
 }
