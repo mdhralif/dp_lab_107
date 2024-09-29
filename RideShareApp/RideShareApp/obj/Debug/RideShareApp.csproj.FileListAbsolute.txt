@@ -1,7 +1,0 @@
-C:\Users\Hp\OneDrive\Desktop\Files\RideShareApp\RideShareApp\bin\Debug\RideShareApp.exe.config
-C:\Users\Hp\OneDrive\Desktop\Files\RideShareApp\RideShareApp\bin\Debug\RideShareApp.exe
-C:\Users\Hp\OneDrive\Desktop\Files\RideShareApp\RideShareApp\bin\Debug\RideShareApp.pdb
-C:\Users\Hp\OneDrive\Desktop\Files\RideShareApp\RideShareApp\obj\Debug\RideShareApp.csproj.AssemblyReference.cache
-C:\Users\Hp\OneDrive\Desktop\Files\RideShareApp\RideShareApp\obj\Debug\RideShareApp.csproj.CoreCompileInputs.cache
-C:\Users\Hp\OneDrive\Desktop\Files\RideShareApp\RideShareApp\obj\Debug\RideShareApp.exe
-C:\Users\Hp\OneDrive\Desktop\Files\RideShareApp\RideShareApp\obj\Debug\RideShareApp.pdb
